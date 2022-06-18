@@ -58,3 +58,7 @@ jobs:
 # License
 
 The scripts and documentation in this project are released under the [MIT License](LICENSE)
+
+# NOTE - Motivation to create own template
+
+[actions/typescript-action](https://github.com/actions/typescript-action) is an official template. However looks not frequency updated.
