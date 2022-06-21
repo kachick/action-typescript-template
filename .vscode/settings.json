@@ -4,5 +4,13 @@
   "editor.formatOnSave": true,
   "cSpell.words": [
     "dprint"
+  ],
+  "json.schemas": [
+    {
+      "fileMatch": [
+        "dprint.json"
+      ],
+      "url": "https://docs.renovatebot.com/renovate-schema.json"
+    }
   ]
 }
