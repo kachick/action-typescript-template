@@ -11,7 +11,9 @@ exports.fetchJobIDs = void 0;
 // REST: https://docs.github.com/en/rest/reference/actions#list-jobs-for-a-workflow-run
 // GitHub does not provide to get job_id, we should get from the run_id https://github.com/actions/starter-workflows/issues/292#issuecomment-922372823
 const listWorkflowRunsRoute = 'GET /repos/{owner}/{repo}/actions/runs/{run_id}/jobs';
-async function fetchJobIDs(octokit, params) {
+async function fetchJobIDs(
+// eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
+octokit, params) {
     return new Set(await octokit.paginate(octokit.rest.actions.listJobsForWorkflowRun, {
         ...params,
         // eslint-disable-next-line camelcase
@@ -8990,10 +8992,10 @@ async function run() {
     const { repo: { repo, owner }, payload, runId, sha, } = github_1.context;
     const pr = payload.pull_request;
     let commitSha = sha;
-    if (pr && 'head' in pr) {
-        const { head } = pr;
-        if (typeof head === 'object' && 'sha' in head) {
-            commitSha = head.sha;
+    if (pr) {
+        const { head: { sha: prSha = sha } } = pr;
+        if (typeof prSha === 'string') {
+            commitSha = prSha;
         }
         else {
             if ((0, core_1.isDebug)()) {
@@ -9025,7 +9027,7 @@ async function run() {
     (0, core_1.info)(JSON.stringify({ ownJobIDs: [...ownJobIDs] }, null, 2));
     (0, core_1.endGroup)();
 }
-run();
+void run();
 
 })();
 
