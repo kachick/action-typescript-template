@@ -1,6 +1,6 @@
 # my-new-action
 
-[![Test & Lint](https://github.com/kachick/my-new-action/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/kachick/my-new-action/actions/workflows/test.yml)
+[![Test & Lint](https://github.com/kachick/my-new-action/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/kachick/my-new-action/actions/workflows/ci.yml?query=branch%3Amaster++)
 
 There is a sin of omission as well as of commission.
 

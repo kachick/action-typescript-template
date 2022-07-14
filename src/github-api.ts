@@ -13,8 +13,9 @@ type ListWorkflowRunsParams = Endpoints[ListWorkflowRunsRoute]['parameters'];
 type JobID = ListWorkflowRunsResponse['data']['jobs'][number]['id'];
 
 export async function fetchJobIDs(
+  // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
   octokit: Octokit,
-  params: Pick<ListWorkflowRunsParams, 'owner' | 'repo' | 'run_id'>,
+  params: Readonly<Pick<ListWorkflowRunsParams, 'owner' | 'repo' | 'run_id'>>,
 ): Promise<Set<JobID>> {
   return new Set(
     await octokit.paginate(
