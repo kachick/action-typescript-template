@@ -33,7 +33,7 @@
     "@octokit/types": "^7.5.0",
     "@tsconfig/node16-strictest-esm": "^1.0.3",
     "@types/node": "^16.11.62",
-    "@typescript-eslint/eslint-plugin": "^5.38.0",
+    "@typescript-eslint/eslint-plugin": "^5.38.1",
     "@typescript-eslint/parser": "^5.38.1",
     "@vercel/ncc": "^0.34.0",
     "dprint": "^0.32.1",
