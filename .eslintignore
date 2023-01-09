@@ -2,4 +2,3 @@ node_modules/
 dist/
 lib/
 jest.config.cjs
-.eslintrc.cjs

@@ -12,12 +12,8 @@ import {
 } from '@actions/core';
 import { getOctokit, context } from '@actions/github';
 
-// eslint-disable-next-line import/no-unresolved
 import { fetchJobIDs } from './github-api.js';
-import {
-  wait,
-  // eslint-disable-next-line import/no-unresolved
-} from './wait.js';
+import { wait } from './wait.js';
 
 async function run(): Promise<void> {
   startGroup('Setup variables');
