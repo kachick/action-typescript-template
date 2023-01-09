@@ -4,7 +4,7 @@ module.exports = {
     es2021: true,
     'jest/globals': true,
   },
-  plugins: ['deprecation', '@typescript-eslint', 'import'],
+  plugins: ['deprecation', '@typescript-eslint'],
   extends: [
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
