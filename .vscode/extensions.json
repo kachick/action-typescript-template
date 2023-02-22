@@ -3,6 +3,8 @@
     "dbaeumer.vscode-eslint",
     "redhat.vscode-yaml",
     "editorconfig.editorconfig",
-    "dprint.dprint"
+    "dprint.dprint",
+    "tamasfe.even-better-toml",
+    "jnoortheen.nix-ide"
   ]
 }
