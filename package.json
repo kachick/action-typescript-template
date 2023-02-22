@@ -12,6 +12,7 @@
     "postpackage": "tsx scripts/rmrf.ts lib",
     "lint:fix": "eslint --fix {src,__tests__}/**/*.ts *.ts",
     "lint:check": "eslint {src,__tests__}/**/*.ts *.ts",
+    "pretest": "npm run package",
     "test": "jest",
     "typecheck": "tsc",
     "repl": "tsx",

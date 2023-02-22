@@ -1,52 +1,6 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 2565:
-/***/ ((__unused_webpack_module, exports) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.fetchJobIDs = void 0;
-// REST: https://docs.github.com/en/rest/reference/actions#list-jobs-for-a-workflow-run
-// GitHub does not provide to get job_id, we should get from the run_id https://github.com/actions/starter-workflows/issues/292#issuecomment-922372823
-const listWorkflowRunsRoute = 'GET /repos/{owner}/{repo}/actions/runs/{run_id}/jobs';
-async function fetchJobIDs(
-// eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
-octokit, params) {
-    return new Set(await octokit.paginate(octokit.rest.actions.listJobsForWorkflowRun, {
-        ...params,
-        // eslint-disable-next-line camelcase
-        per_page: 100,
-        filter: 'latest',
-    }, (resp) => resp.data.map((job) => job.id)));
-}
-exports.fetchJobIDs = fetchJobIDs;
-
-
-/***/ }),
-
-/***/ 5817:
-/***/ ((__unused_webpack_module, exports) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.wait = void 0;
-// Taken from https://github.com/actions/typescript-action/blob/0cfebb2981ce6c1515b16445379303805459ea46/src/wait.ts Thank you!
-async function wait(milliseconds) {
-    return new Promise((resolve) => {
-        if (Number.isNaN(milliseconds)) {
-            throw new Error('milliseconds not a number');
-        }
-        setTimeout(() => resolve('done!'), milliseconds);
-    });
-}
-exports.wait = wait;
-
-
-/***/ }),
-
 /***/ 7351:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
@@ -9657,52 +9611,81 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
 (() => {
 "use strict";
-var exports = __webpack_exports__;
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const core_1 = __nccwpck_require__(2186);
-const github_1 = __nccwpck_require__(5438);
-const github_api_js_1 = __nccwpck_require__(2565);
-const wait_js_1 = __nccwpck_require__(5817);
+
+// src/main.ts
+var import_core = __nccwpck_require__(2186);
+var import_github = __nccwpck_require__(5438);
+
+// src/github-api.ts
+async function fetchJobIDs(octokit, params) {
+  return new Set(
+    await octokit.paginate(
+      octokit.rest.actions.listJobsForWorkflowRun,
+      {
+        ...params,
+        // eslint-disable-next-line camelcase
+        per_page: 100,
+        filter: "latest"
+      },
+      (resp) => resp.data.map((job) => job.id)
+    )
+  );
+}
+
+// src/wait.ts
+async function wait(milliseconds) {
+  return new Promise((resolve) => {
+    if (Number.isNaN(milliseconds)) {
+      throw new Error("milliseconds not a number");
+    }
+    setTimeout(() => resolve("done!"), milliseconds);
+  });
+}
+
+// src/main.ts
 async function run() {
-    (0, core_1.startGroup)('Setup variables');
-    const { repo: { repo, owner }, payload, runId, sha, } = github_1.context;
-    const pr = payload.pull_request;
-    let commitSha = sha;
-    if (pr) {
-        const { head: { sha: prSha = sha } } = pr;
-        if (typeof prSha === 'string') {
-            commitSha = prSha;
-        }
-        else {
-            if ((0, core_1.isDebug)()) {
-                (0, core_1.debug)(JSON.stringify(pr, null, 2));
-            }
-            (0, core_1.error)('github context has unexpected format: missing context.payload.pull_request.head.sha');
-            (0, core_1.setFailed)('unexpected failure occurred');
-            return;
-        }
+  (0, import_core.startGroup)("Setup variables");
+  const {
+    repo: { repo, owner },
+    payload,
+    runId,
+    sha
+  } = import_github.context;
+  const pr = payload.pull_request;
+  let commitSha = sha;
+  if (pr) {
+    const { head: { sha: prSha = sha } } = pr;
+    if (typeof prSha === "string") {
+      commitSha = prSha;
+    } else {
+      if ((0, import_core.isDebug)()) {
+        (0, import_core.debug)(JSON.stringify(pr, null, 2));
+      }
+      (0, import_core.error)("github context has unexpected format: missing context.payload.pull_request.head.sha");
+      (0, import_core.setFailed)("unexpected failure occurred");
+      return;
     }
-    (0, core_1.info)(JSON.stringify({ triggeredCommitSha: commitSha, ownRunId: runId }, null, 2));
-    const repositoryInfo = {
-        owner,
-        repo,
-    };
-    const isEarlyExit = (0, core_1.getBooleanInput)('early-exit', { required: true, trimWhitespace: true });
-    const isDryRun = (0, core_1.getBooleanInput)('dry-run', { required: true, trimWhitespace: true });
-    const githubToken = (0, core_1.getInput)('github-token', { required: true, trimWhitespace: false });
-    (0, core_1.setSecret)(githubToken);
-    const octokit = (0, github_1.getOctokit)(githubToken);
-    (0, core_1.endGroup)();
-    if (isDryRun || isEarlyExit) {
-        return;
-    }
-    await (0, wait_js_1.wait)(42);
-    (0, core_1.startGroup)('Get own job_id');
-    // eslint-disable-next-line camelcase
-    const ownJobIDs = await (0, github_api_js_1.fetchJobIDs)(octokit, { ...repositoryInfo, run_id: runId });
-    (0, core_1.info)(JSON.stringify({ ownJobIDs: [...ownJobIDs] }, null, 2));
-    (0, core_1.endGroup)();
+  }
+  (0, import_core.info)(JSON.stringify({ triggeredCommitSha: commitSha, ownRunId: runId }, null, 2));
+  const repositoryInfo = {
+    owner,
+    repo
+  };
+  const isEarlyExit = (0, import_core.getBooleanInput)("early-exit", { required: true, trimWhitespace: true });
+  const isDryRun = (0, import_core.getBooleanInput)("dry-run", { required: true, trimWhitespace: true });
+  const githubToken = (0, import_core.getInput)("github-token", { required: true, trimWhitespace: false });
+  (0, import_core.setSecret)(githubToken);
+  const octokit = (0, import_github.getOctokit)(githubToken);
+  (0, import_core.endGroup)();
+  if (isDryRun || isEarlyExit) {
+    return;
+  }
+  await wait(42);
+  (0, import_core.startGroup)("Get own job_id");
+  const ownJobIDs = await fetchJobIDs(octokit, { ...repositoryInfo, run_id: runId });
+  (0, import_core.info)(JSON.stringify({ ownJobIDs: [...ownJobIDs] }, null, 2));
+  (0, import_core.endGroup)();
 }
 void run();
 
