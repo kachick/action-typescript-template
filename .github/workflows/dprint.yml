@@ -4,13 +4,9 @@ on:
     branches: [main]
     paths-ignore:
       - 'dist'
-      - 'assets'
-      - 'LICENSE'
   pull_request:
     paths-ignore:
       - 'dist'
-      - 'assets'
-      - 'LICENSE'
 jobs:
   dprint:
     runs-on: ubuntu-latest

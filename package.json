@@ -7,15 +7,14 @@
     "node": "16.x"
   },
   "scripts": {
-    "prebuild": "rimraf lib",
-    "build": "tsc --project tsconfig.build.json",
-    "format:fix": "dprint fmt",
-    "format:check": "dprint check",
+    "prepackage": "tsx scripts/rmrf.ts lib dist",
+    "package": "esbuild src/main.ts --bundle --platform=node --target=node16 --packages=external --outfile=lib/main.js && ncc build",
+    "postpackage": "tsx scripts/rmrf.ts lib",
     "lint:fix": "eslint --fix {src,__tests__}/**/*.ts *.ts",
     "lint:check": "eslint {src,__tests__}/**/*.ts *.ts",
-    "prepackage": "rimraf dist",
-    "package": "ncc build",
     "test": "jest",
+    "typecheck": "tsc",
+    "repl": "tsx",
     "all": "npm run format:check && npm run lint:check && npm run build && npm run package && npm test"
   },
   "repository": {
