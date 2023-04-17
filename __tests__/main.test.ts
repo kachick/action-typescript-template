@@ -1,6 +1,6 @@
 import { wait } from '../src/wait';
 import { env, execPath } from 'process';
-import { execFileSync, ExecFileSyncOptions } from 'child_process';
+import { execFileSync, type ExecFileSyncOptions } from 'child_process';
 import { join } from 'path';
 import { expect, test } from '@jest/globals';
 
