@@ -4,7 +4,7 @@
 
 There is a sin of omission as well as of commission.
 
-# Usage
+## Usage
 
 I recommend to use `timeout-minutes` together with as easy fool proof.\
 Below is a typical usecase.
@@ -31,11 +31,7 @@ jobs:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
 ```
 
-# License
-
-The scripts and documentation in this project are released under the [MIT License](LICENSE)
-
-# NOTE - Motivation to create own template
+## NOTE - Motivation to create own template
 
 [actions/typescript-action](https://github.com/actions/typescript-action) is the official template.\
 However, it does not seem to be updated often.\
