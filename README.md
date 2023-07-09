@@ -27,8 +27,6 @@ jobs:
       - uses: actions/checkout@v3
       - uses: kachick/my-new-action@v1
         timeout-minutes: 15
-        with:
-          github-token: "${{ secrets.GITHUB_TOKEN }}"
 ```
 
 ## NOTE - Motivation to create own template

@@ -8,6 +8,7 @@ inputs:
   github-token:
     description: 'GitHub token (Basically PAT is needless. Passing GITHUB_TOKEN is enough.)'
     required: true
+    default: ${{ github.token }}
   early-exit:
     description: 'Stop to rest pollings if faced at least 1 bad condition'
     required: false
