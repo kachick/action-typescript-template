@@ -15,6 +15,16 @@ script = [
   "dprint fmt",
 ]
 
+[tasks.fmt]
+alias = "format-apply"
+
+[tasks.typos-check]
+category = "Tools"
+description = "Run typo checker without changes"
+script = [
+  "typos",
+]
+
 [tasks.lint-apply]
 category = "Tools"
 description = "Run linters with changes"
@@ -36,6 +46,9 @@ dependencies = [
 script = [
   "npm run lint:check",
 ]
+
+[tasks.lint]
+alias = "lint-check"
 
 [tasks.test-ts]
 category = "Tools"
@@ -61,7 +74,7 @@ script = [
 [tasks.check]
 category = "Tools"
 description = 'Parallel runner for all tests and linters'
-run_task = { name = ["test-ts", "typecheck", "lint-check"], parallel = true }
+run_task = { name = ["typos-check", "test-ts", "typecheck", "lint-check"], parallel = true }
 
 [tasks.all]
 category = "Tools"
