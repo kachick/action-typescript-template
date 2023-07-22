@@ -9639,7 +9639,9 @@ async function wait(milliseconds) {
     if (Number.isNaN(milliseconds)) {
       throw new Error("milliseconds not a number");
     }
-    setTimeout(() => resolve("done!"), milliseconds);
+    setTimeout(() => {
+      resolve("done!");
+    }, milliseconds);
   });
 }
 
