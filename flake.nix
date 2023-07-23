@@ -13,7 +13,7 @@
             inherit system;
             config = {
               permittedInsecurePackages = [
-                "nodejs-16.20.0"
+                "nodejs-16.20.1"
               ];
             };
           };
@@ -22,7 +22,7 @@
         devShells.default = with pkgs;
           mkShell {
             buildInputs = [
-              nodejs-16_x
+              nodejs_16
               dprint
               cargo-make
               nil
