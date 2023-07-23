@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/23.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/ffce3e381807c51a98cc62bd1afa251a0456248c";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
@@ -13,7 +13,7 @@
             inherit system;
             config = {
               permittedInsecurePackages = [
-                "nodejs-16.20.0"
+                "nodejs-16.20.1"
               ];
             };
           };
@@ -22,7 +22,7 @@
         devShells.default = with pkgs;
           mkShell {
             buildInputs = [
-              nodejs-16_x
+              nodejs_16
               dprint
               cargo-make
               nil
