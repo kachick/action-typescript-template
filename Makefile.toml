@@ -29,7 +29,7 @@ alias = "format-apply"
 category = "Tools"
 description = "Run typo checker without changes"
 script = [
-  "typos",
+  "typos . .github .vscode",
 ]
 
 [tasks.lint-apply]
