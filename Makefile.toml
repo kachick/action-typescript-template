@@ -52,6 +52,7 @@ dependencies = [
 ]
 script = [
   "npm run lint:check",
+  "actionlint",
 ]
 
 [tasks.lint]
@@ -106,6 +107,7 @@ script = [
   # Returns NON 0, why...? :<
   # "nixpkgs-fmt --version",
   "typos --version",
+  "actionlint --version",
 ]
 
 [tasks.check_no_git_diff]
