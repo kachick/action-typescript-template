@@ -28,6 +28,7 @@
               nil
               nixpkgs-fmt
               typos
+              actionlint
             ];
           };
       });
