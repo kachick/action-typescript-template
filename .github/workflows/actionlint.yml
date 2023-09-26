@@ -19,7 +19,7 @@ jobs:
         id: get_actionlint
         # https://github.com/rhysd/actionlint/blob/590d3bd9dde0c91f7a66071d40eb84716526e5a6/scripts/download-actionlint.bash#L46-L47
         # https://stackoverflow.com/questions/4642915/passing-parameters-to-bash-when-executing-a-script-fetched-by-curl
-        run: curl -fsSL https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash | bash -s -- '1.6.25' # selfup { "regex": "\\d\\.[^']+", "script": "actionlint --version | head -n 1" }
+        run: curl -fsSL https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash | bash -s -- '1.6.26' # selfup { "regex": "\\d\\.[^']+", "script": "actionlint --version | head -n 1" }
         shell: bash
       - name: Check workflow files
         run: ${{ steps.get_actionlint.outputs.executable }} -color
