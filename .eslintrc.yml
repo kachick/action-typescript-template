@@ -2,22 +2,12 @@ root: true
 env:
   node: true
   es2021: true
-  jest/globals: true
 plugins:
   - '@typescript-eslint'
 extends:
   - eslint:recommended
   - plugin:@typescript-eslint/strict-type-checked
   - plugin:@typescript-eslint/stylistic-type-checked
-overrides:
-  - files:
-      - __tests__/**/*.ts
-    plugins:
-      - jest
-    extends:
-      - plugin:jest/recommended
-    rules:
-      filenames/match-regex: 'off'
 rules:
   i18n-text/no-en: 'off'
   no-restricted-syntax:

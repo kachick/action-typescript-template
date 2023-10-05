@@ -8,59 +8,25 @@ script = [
   "npm ci --ignore-scripts",
 ]
 
-[tasks.format-check]
-category = "Tools"
-description = "Run formatters without changes"
-script = [
-  "dprint check",
-]
-
-[tasks.format-apply]
+[tasks.fmt]
 category = "Tools"
 description = "Run formatters with changes"
 script = [
   "dprint fmt",
 ]
 
-[tasks.fmt]
-alias = "format-apply"
-
-[tasks.typos-check]
-category = "Tools"
-description = "Run typo checker without changes"
-script = [
-  "typos . .github .vscode",
-]
-
-[tasks.lint-apply]
-category = "Tools"
-description = "Run linters with changes"
-dependencies = [
-  # Do not run parallel, because of dprint is superfast and eslint is slow. So sequential makes useful here.
-  "format-apply",
-]
-script = [
-  "npm run lint:fix",
-]
-
-[tasks.lint-check]
+[tasks.lint]
 category = "Tools"
 description = "Run linters without changes"
-dependencies = [
-  # Do not run parallel, because of dprint is superfast and eslint is slow. So sequential makes useful here.
-  "format-check",
-]
 script = [
-  "npm run lint:check",
+  "dprint check",
+  "typos . .github .vscode",
   "actionlint",
 ]
 
-[tasks.lint]
-alias = "lint-check"
-
-[tasks.test-ts]
+[tasks.test]
 category = "Tools"
-description = 'Test typescripts'
+description = 'Test'
 script = [
   "npm test",
 ]
@@ -82,7 +48,7 @@ script = [
 [tasks.check]
 category = "Tools"
 description = 'Parallel runner for all tests and linters'
-run_task = { name = ["typos-check", "test-ts", "typecheck", "lint-check"], parallel = true }
+run_task = { name = ["test", "typecheck", "lint"], parallel = true }
 
 [tasks.all]
 category = "Tools"
