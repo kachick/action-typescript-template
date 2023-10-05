@@ -7640,7 +7640,6 @@ async function fetchJobIDs(octokit, params) {
       octokit.rest.actions.listJobsForWorkflowRun,
       {
         ...params,
-        // eslint-disable-next-line camelcase
         per_page: 100,
         filter: "latest"
       },
@@ -7650,16 +7649,8 @@ async function fetchJobIDs(octokit, params) {
 }
 
 // src/wait.ts
-async function wait(milliseconds) {
-  return new Promise((resolve) => {
-    if (Number.isNaN(milliseconds)) {
-      throw new Error("milliseconds not a number");
-    }
-    setTimeout(() => {
-      resolve("done!");
-    }, milliseconds);
-  });
-}
+import { setTimeout as setTimeout2 } from "timers/promises";
+var wait = setTimeout2;
 
 // src/main.ts
 async function run() {

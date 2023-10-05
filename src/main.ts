@@ -63,7 +63,6 @@ async function run(): Promise<void> {
 
   startGroup('Get own job_id');
 
-  // eslint-disable-next-line camelcase
   const ownJobIDs = await fetchJobIDs(octokit, { ...repositoryInfo, run_id: runId });
   info(JSON.stringify({ ownJobIDs: [...ownJobIDs] }, null, 2));
 

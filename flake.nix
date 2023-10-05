@@ -24,6 +24,7 @@
               bashInteractive
 
               nodejs_20
+              deno
               dprint
               cargo-make
               nil
