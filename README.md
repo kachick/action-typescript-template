@@ -21,7 +21,7 @@ permissions:
 
 jobs:
   example-of-my-new-action:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     if: ${{ github.actor == 'dependabot[bot]' }}
     steps:
       - uses: actions/checkout@v3
