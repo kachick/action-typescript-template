@@ -77,8 +77,7 @@ script = [
   "nix --version",
   "makers --version",
   "dprint --version",
-  # Returns NON 0, why...? :<
-  # "nixpkgs-fmt --version",
+  "nixfmt --version",
   "typos --version",
 ]
 
