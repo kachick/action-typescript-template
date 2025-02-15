@@ -1,4 +1,12 @@
-# my-new-action
+# action-typescript-template
+
+- _**This repository is archived**_
+- _**No longer maintained**_
+- I have [an active repository](https://github.com/kachick/wait-other-jobs), but this template did not track the updates in these days.
+
+---
+
+## my-new-action
 
 [![Test & Lint](https://github.com/kachick/action-typescript-template/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/kachick/action-typescript-template/actions/workflows/ci.yml?query=branch%main++)
 
